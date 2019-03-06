@@ -1,0 +1,55 @@
+Public Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As LongPtr)
+
+Sub Envia_Email()
+    Application.ScreenUpdating = False
+    Dim OutlookApp As Object
+    Dim OutlookMail As Object
+    Set OutlookApp = CreateObject("Outlook.Application")
+    Set OutlookMail = OutlookApp.CreateItem(0)
+    With OutlookMail
+        .To = "emailPara@provedor.com"
+        .CC = "emailCopia@provedor.com"
+        .BCC = "emailCopiaOculta@provedor.com"
+        .Subject = "Assunto do e-mail"
+        .Body = ""
+        .Display ' para enviar o email diretamente use o código  .Send
+    End With
+    
+    Worksheets("Planilha1").Activate
+    Range("B2:F12").Select
+    Application.CutCopyMode = False
+    Sleep (500)
+    Selection.CopyPicture Appearance:=xlScreen, Format:=xlPicture 'xlPicture deixa imagem com qualidade superior ao xlBitmap
+    Sleep (500)
+    SendKeys "^v", True
+    SendKeys "+{LEFT}", True
+    SendKeys "+{F10}", True
+    SendKeys "{UP 2}", True
+    SendKeys "{ENTER}", True
+    SendKeys "{TAB 5}", True
+    SendKeys "15", True 'Largura em cm da imagem colada
+    SendKeys "{ENTER}", True
+    SendKeys "{END}", True
+    SendKeys "{ENTER 2}", True
+    Sleep (750)
+   
+    Sheets("Planilha2").Select
+    ActiveSheet.Range("B2:E12").Select
+    Application.CutCopyMode = False
+    Sleep (500)
+    Selection.CopyPicture Appearance:=xlScreen, Format:=xlPicture 'xlPicture deixa imagem com qualidade superior ao xlBitmap
+    Sleep (500)
+    SendKeys "^v", True
+    SendKeys "+{LEFT}", True
+    SendKeys "+{F10}", True
+    SendKeys "{UP 2}", True
+    SendKeys "{ENTER}", True
+    SendKeys "{TAB 5}", True
+    SendKeys "15", True 'Largura em cm da imagem colada
+    SendKeys "{ENTER}", True
+    SendKeys "{END}", True
+    SendKeys "{ENTER 2}", True
+    
+    Set OutlookMail = Nothing
+    Set OutlookApp = Nothing
+End Sub
