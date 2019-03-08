@@ -1,0 +1,18 @@
+ActiveSheet.ChartObjects("Gráfico 1").Activate
+
+y1 = ActiveChart.SeriesCollection(1).Values
+y2 = ActiveChart.SeriesCollection(2).Values
+For i = 1 To UBound(y1)
+    If y1(i) > y2(i) Then
+        ActiveChart.FullSeriesCollection(1).Points(i).Select
+        ActiveChart.SetElement (msoElementDataLabelTop)
+        ActiveChart.FullSeriesCollection(2).Points(i).Select
+        ActiveChart.SetElement (msoElementDataLabelBottom)
+    Else
+        ActiveChart.FullSeriesCollection(1).Points(i).Select
+        ActiveChart.SetElement (msoElementDataLabelBottom)
+        ActiveChart.FullSeriesCollection(2).Points(i).Select
+        ActiveChart.SetElement (msoElementDataLabelTop)
+    End If
+    
+Next i
