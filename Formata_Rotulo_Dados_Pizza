@@ -1,0 +1,14 @@
+    ActiveSheet.ChartObjects("Gráfico 1").Activate
+    
+    num_pontos = ActiveChart.FullSeriesCollection(1).Points.Count
+    
+    For i = 1 To num_pontos
+        ActiveChart.FullSeriesCollection(1).Points(i).DataLabel.Select
+        Selection.Width = 40
+        Selection.Height = 28
+        
+        If ActiveChart.FullSeriesCollection(1).Points(i) < 0.1 Then
+            ActiveChart.SetElement (msoElementDataLabelOutSideEnd)
+        End If
+        
+    Next i
